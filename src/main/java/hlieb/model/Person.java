@@ -12,6 +12,8 @@ import java.util.TreeSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -40,6 +42,7 @@ public class Person {
 	@JoinColumn(name = "id_location_Person")
 	private Location location;
 	@Column(name = "gender_Person")
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "id_contact_Person")

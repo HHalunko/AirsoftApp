@@ -70,6 +70,34 @@ public class Age {
 		return true;
 	}
 
+	public static long getCount() {
+		return count;
+	}
+
+	public static void setCount(long count) {
+		Age.count = count;
+	}
+
+	public String getBirthdateString() {
+		return birthdateString;
+	}
+
+	public void setBirthdateString(String birthdateString) {
+		this.birthdateString = birthdateString;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public void setCurrentFullAge(int currentFullAge) {
+		this.currentFullAge = currentFullAge;
+	}
+
 	@Override
 	public String toString() {
 		return "Age [birthDate=" + birthDate + ", currentFullAge="

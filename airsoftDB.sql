@@ -33,7 +33,7 @@ USE airsoftappdb;
    `id_age_Person` bigint(255) not null,
    `info_Person` varchar(200),
    `id_location_Person` bigint(255) NOT NULL,
-   `gender_Person` integer(20),
+   `gender_Person` varchar(20) not null,
    `id_contact_Person` bigint(11) NOT NULL,
    `registDate_Person` varchar(200) not null,
    PRIMARY KEY (`id_Person`),
