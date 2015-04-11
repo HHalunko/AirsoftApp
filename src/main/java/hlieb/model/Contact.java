@@ -1,15 +1,26 @@
 package hlieb.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="contact")
 public class Contact {
+	@Transient
+	private static long count;
+	@Id
+	@Column(name = "id_contact")
+	private final long id = ++count;
 	//unique
+	@Column(name = "phone_contact")
 	private String phoneNumber;
 	//unique
+	@Column(name = "email_contact")
 	private String emailAdress;
-	//unique
+	@Column(name = "skype_contact")
 	private String skype;
-	//unique
+	@Column(name = "facebook_contact")
 	private String facebook;
-	//unique
+	@Column(name = "vk_contact")
 	private String vkontakte;
 
 	public Contact() {

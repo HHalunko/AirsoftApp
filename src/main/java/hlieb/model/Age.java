@@ -2,11 +2,24 @@ package hlieb.model;
 
 import java.time.LocalDate;
 
-public class Age {
+import javax.persistence.*;
 
+@Entity
+@Table(name="age")
+public class Age {
+	@Transient
+	private static long count;
+	@Id
+	@Column(name = "id_age")
+	private final long id = ++count;
+
+	@Transient
 	private LocalDate birthDate;
+	@Column(name = "birth_date")
+	private String birthdateString;
+	@Column(name = "current_full_age")
 	private int currentFullAge;
-	
+
 	public Age() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -15,7 +28,9 @@ public class Age {
 	public Age(LocalDate birthDate) {
 		super();
 		this.birthDate = birthDate;
-		this.currentFullAge = LocalDate.now().minusYears(birthDate.getYear()).getYear();
+		this.currentFullAge = LocalDate.now().minusYears(birthDate.getYear())
+				.getYear();
+		this.birthdateString = birthDate.toString();
 	}
 
 	public LocalDate getBirthDate() {
@@ -60,5 +75,5 @@ public class Age {
 		return "Age [birthDate=" + birthDate + ", currentFullAge="
 				+ currentFullAge + "]";
 	}
-	
+
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+		<property name="hibernate.connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+		<property name="hibernate.connection.url">
+			jdbc:mysql://localhost/airsoftappdb
+		</property>
+		<property name="hibernate.connection.user">root</property>
+		<property name="hibernate.connection.password">123456</property>
+		
+		<property name="hbm2ddl.auto">validate</property>
+		<property name="show_sql">true</property>
+		
+		<mapping class="hlieb.model.Person" />
+		<mapping class="hlieb.model.Age" />
+		<mapping class="hlieb.model.Location" />
+		<mapping class="hlieb.model.Contact" />
+		
+	</session-factory>
+</hibernate-configuration>

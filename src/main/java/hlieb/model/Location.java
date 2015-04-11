@@ -1,9 +1,20 @@
 package hlieb.model;
 
-public class Location {
+import javax.persistence.*;
 
+@Entity
+@Table(name="Location")
+public class Location {
+	@Transient
+	private static long count;
+	@Id
+	@Column(name="id_Location")
+	private final long id = ++count;
+	@Column(name="country_Location")
 	private String country;
+	@Column(name="city_Location")
 	private String city;
+	@Column(name="street_Location")
 	private String street;
 
 	public Location() {
@@ -16,6 +27,14 @@ public class Location {
 		this.country = country;
 		this.city = city;
 		this.street = street;
+	}
+
+	public static long getCount() {
+		return count;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 	public String getCountry() {
@@ -81,8 +100,8 @@ public class Location {
 
 	@Override
 	public String toString() {
-		return "Location [country=" + country + ", city=" + city + ", street="
-				+ street + "]";
+		return "Location [id=" + id + ", country=" + country + ", city=" + city
+				+ ", street=" + street + "]";
 	}
 
 }

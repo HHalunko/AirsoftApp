@@ -9,25 +9,55 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+@Entity
+@Table(name = "Person")
 public class Person {
 
 	// Fields
+	@Transient
 	private static long count;
+	@Id
+	@Column(name = "id_Person")
 	private final long id = ++count;
-	//unique
+	@Column(name = "firstName_Person")
 	private String firstName;
+	@Column(name = "lastName_Person")
 	private String lastName;
 	//unique
+	@Column(name = "nickname_Person")
 	private String nickname;
+	@Column(name = "info_Person")
 	private String info;
+	@OneToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "id_location_Person")
 	private Location location;
+	@Column(name = "gender_Person")
 	private Gender gender;
+	@OneToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "id_contact_Person")
 	private Contact contacts;
+	@OneToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "id_age_Person")
 	private Age age;
+	@Transient
 	private LocalDateTime registDate;
+	@Column(name ="registDate_Person")
+    private String registDateString;	
+	@Transient
 	private Set<Team> teams = new TreeSet<Team>();
+	@Transient
 	private Set<Camo> personCamos = new TreeSet<Camo>();
+	@Transient
 	private List<Weapon> personWeapons = new ArrayList<Weapon>();
+	@Transient
 	private Set<Gear> personGear = new TreeSet<Gear>();
 
 	// Specified only modified default constructor in order to obligatory
@@ -36,6 +66,7 @@ public class Person {
 	public Person() {
 		super();
 		registDate = LocalDateTime.now();
+		registDateString = registDate.toString();
 	}
 
 	// Setters
