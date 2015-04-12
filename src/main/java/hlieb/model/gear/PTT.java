@@ -1,20 +1,19 @@
 package hlieb.model.gear;
 
-public class NVG extends Gear implements ElectronicGear {
+public class PTT extends Gear implements ElectronicGear{
 
-	public NVG() {
-		super();
+	public PTT() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public NVG(String modelName, String color, String manufacturer) {
+	public PTT(String modelName, String color, String manufacturer) {
 		super(modelName, color, manufacturer);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String toString() {
-		return "NVG " + super.toString();
+		return "PTT " + super.toString();
 	}
-	
+
 }

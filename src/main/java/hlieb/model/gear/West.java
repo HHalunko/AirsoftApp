@@ -1,6 +1,6 @@
 package hlieb.model.gear;
 
-public abstract interface West{
+public interface West{
 
 
 }

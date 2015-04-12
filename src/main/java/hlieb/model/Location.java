@@ -16,6 +16,16 @@ public class Location {
 	private String city;
 	@Column(name="street_Location")
 	private String street;
+	@Column(name="coordinates_Location")
+	private String coordinates;
+
+	public String getCoordinates() {
+		return coordinates;
+	}
+
+	public void setCoordinates(String coordinates) {
+		this.coordinates = coordinates;
+	}
 
 	public Location() {
 		super();
@@ -101,7 +111,9 @@ public class Location {
 	@Override
 	public String toString() {
 		return "Location [id=" + id + ", country=" + country + ", city=" + city
-				+ ", street=" + street + "]";
+				+ ", street=" + street + ", coordinates=" + coordinates + "]";
 	}
 
+ 
+	
 }

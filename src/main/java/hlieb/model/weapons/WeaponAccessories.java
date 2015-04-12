@@ -1,6 +1,6 @@
 package hlieb.model.weapons;
 
-public abstract class WeaponAccessories {
+public class WeaponAccessories {
 	private String modelName;
 	private WeaponAccessoriesType type;
 	private String manufacturer;
