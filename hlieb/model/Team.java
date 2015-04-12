@@ -7,32 +7,60 @@ import java.time.LocalDate;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Team")
 public class Team {
-
-	private static int count;
-	private final int id = ++count;
-	//unique
+	@Transient
+	private static long count;
+	@Id
+	@Column(name="id_Team")
+	private final long id = ++count;
+	// unique
+	@Column(name="teamName_Team")
 	private String teamName;
+	@Column(name="info_Team")
 	private String info;
+	@OneToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="id_location_Team")
 	private Location teamLocation;
+	@OneToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="id_unit_Team")
 	private Unit modelOf;
+	@OneToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="id_teamleader_Team")
 	private Person teamLeader;
+	@Transient
 	private Set<Person> teamMembers = new TreeSet<Person>();
+	@Transient
 	private Set<Weapon> teamWeapons = new TreeSet<Weapon>();
+	@Transient
 	private Set<Camo> teamCamos = new TreeSet<Camo>();
+	@Transient
 	private Set<Gear> teamGear = new TreeSet<Gear>();
+	@Transient
 	private LocalDate startOfPeriod;
+	@Column(name="startPeriod_Team")
+	private String start;
+	@Transient
 	private LocalDate endOfPeriod;
-
+	@Column(name="endPeriod_Team")
+	private String end;
+	
 	public Team() {
 		super();
 	}
 
-	public Team(String teamName, Location teamLocation, Unit modelOf,
-			Person teamLeader, Set<Person> teamMembers,
-			Set<Weapon> teamWeapons, Set<Camo> teamCamos, Set<Gear> teamGear) {
+
+
+	public Team(String teamName, String info, Location teamLocation,
+			Unit modelOf, Person teamLeader, Set<Person> teamMembers,
+			Set<Weapon> teamWeapons, Set<Camo> teamCamos, Set<Gear> teamGear,
+			LocalDate startOfPeriod, LocalDate endOfPeriod) {
 		super();
 		this.teamName = teamName;
+		this.info = info;
 		this.teamLocation = teamLocation;
 		this.modelOf = modelOf;
 		this.teamLeader = teamLeader;
@@ -40,6 +68,10 @@ public class Team {
 		this.teamWeapons = teamWeapons;
 		this.teamCamos = teamCamos;
 		this.teamGear = teamGear;
+		this.startOfPeriod = startOfPeriod;
+		this.endOfPeriod = endOfPeriod;
+		this.start = startOfPeriod.toString();
+		this.end = endOfPeriod.toString();
 	}
 
 	public String getTeamName() {
@@ -149,11 +181,11 @@ public class Team {
 		this.teamGear.add(gear);
 	}
 
-	public static int getCount() {
+	public static long getCount() {
 		return count;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -177,8 +209,15 @@ public class Team {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((end == null) ? 0 : end.hashCode());
+		result = prime * result
+				+ ((endOfPeriod == null) ? 0 : endOfPeriod.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((info == null) ? 0 : info.hashCode());
 		result = prime * result + ((modelOf == null) ? 0 : modelOf.hashCode());
+		result = prime * result + ((start == null) ? 0 : start.hashCode());
+		result = prime * result
+				+ ((startOfPeriod == null) ? 0 : startOfPeriod.hashCode());
 		result = prime * result
 				+ ((teamCamos == null) ? 0 : teamCamos.hashCode());
 		result = prime * result
@@ -196,6 +235,8 @@ public class Team {
 		return result;
 	}
 
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -205,12 +246,37 @@ public class Team {
 		if (getClass() != obj.getClass())
 			return false;
 		Team other = (Team) obj;
+		if (end == null) {
+			if (other.end != null)
+				return false;
+		} else if (!end.equals(other.end))
+			return false;
+		if (endOfPeriod == null) {
+			if (other.endOfPeriod != null)
+				return false;
+		} else if (!endOfPeriod.equals(other.endOfPeriod))
+			return false;
 		if (id != other.id)
+			return false;
+		if (info == null) {
+			if (other.info != null)
+				return false;
+		} else if (!info.equals(other.info))
 			return false;
 		if (modelOf == null) {
 			if (other.modelOf != null)
 				return false;
 		} else if (!modelOf.equals(other.modelOf))
+			return false;
+		if (start == null) {
+			if (other.start != null)
+				return false;
+		} else if (!start.equals(other.start))
+			return false;
+		if (startOfPeriod == null) {
+			if (other.startOfPeriod != null)
+				return false;
+		} else if (!startOfPeriod.equals(other.startOfPeriod))
 			return false;
 		if (teamCamos == null) {
 			if (other.teamCamos != null)
@@ -250,6 +316,8 @@ public class Team {
 		return true;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Team [id=" + id + ", teamName=" + teamName + ", info=" + info
@@ -259,7 +327,5 @@ public class Team {
 				+ ", teamGear=" + teamGear + ", startOfPeriod=" + startOfPeriod
 				+ ", endOfPeriod=" + endOfPeriod + "]";
 	}
-
-
 
 }

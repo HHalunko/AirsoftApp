@@ -2,15 +2,26 @@ package hlieb.model;
 
 import java.util.Set;
 import java.util.TreeSet;
+import javax.persistence.*;
 
+@Entity
+@Table(name="Camo")
 public class Camo {
-	private static int count;
-	private final int id = ++count;
+	@Transient
+	private static long count;
+	@Id
+	@Column(name="id_Camo")
+	private final long id = ++count;
 	//unique
+	@Column(name="name_Camo")
 	private String name;
+	@Column(name="info_Camo")
 	private String info;
+	@Transient
 	private Set<Team> usingTeams = new TreeSet<Team>();
+	@Transient
 	private Set<String> manufacturers = new TreeSet<String>();
+	@Transient
 	private Set<Unit> usingUnits = new TreeSet<Unit>();
 	public Camo() {
 		super();
@@ -55,10 +66,10 @@ public class Camo {
 	public void setUsingUnits(Set<Unit> usingUnits) {
 		this.usingUnits = usingUnits;
 	}
-	public static int getCount() {
+	public static long getCount() {
 		return count;
 	}
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	
@@ -73,11 +84,12 @@ public class Camo {
 	public void addManufacturer(String manufacturer){
 		this.manufacturers.add(manufacturer);
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((info == null) ? 0 : info.hashCode());
 		result = prime * result
 				+ ((manufacturers == null) ? 0 : manufacturers.hashCode());

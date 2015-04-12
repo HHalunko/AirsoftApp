@@ -1,9 +1,22 @@
 package hlieb.model.weapons;
 
+import javax.persistence.*;
+@Entity
+@Table(name="WeaponAccessories")
 public class WeaponAccessories {
+	@Transient
+	private static long count;
+	@Id
+	@Column(name = "id_WA")
+	private final long id = ++count;
+	@Column(name = "name_WA")
 	private String modelName;
+	@Column(name="type_WA")
+	@Enumerated(EnumType.STRING)
 	private WeaponAccessoriesType type;
+	@Column(name = "manufacturer_WA")
 	private String manufacturer;
+	@Column(name = "color_WA")
 	private String color;
 
 	public WeaponAccessories() {
@@ -11,12 +24,16 @@ public class WeaponAccessories {
 		// TODO Auto-generated constructor stub
 	}
 
-	public WeaponAccessories(WeaponAccessoriesType type, String manufacturer, String color) {
+	public WeaponAccessories(String modelName, WeaponAccessoriesType type,
+			String manufacturer, String color) {
 		super();
+		this.modelName = modelName;
 		this.type = type;
 		this.manufacturer = manufacturer;
 		this.color = color;
 	}
+
+
 
 	public WeaponAccessoriesType getType() {
 		return type;
@@ -28,6 +45,14 @@ public class WeaponAccessories {
 
 	public String getModelName() {
 		return modelName;
+	}
+
+	public static long getCount() {
+		return count;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 	public void setModelName(String modelName) {
@@ -52,8 +77,9 @@ public class WeaponAccessories {
 
 	@Override
 	public String toString() {
-		return "Accessories [modelName=" + modelName + ", type=" + type
-				+ ", manufacturer=" + manufacturer + ", color=" + color + "]";
+		return "WeaponAccessories [id=" + id + ", modelName=" + modelName
+				+ ", type=" + type + ", manufacturer=" + manufacturer
+				+ ", color=" + color + "]";
 	}
 
 	

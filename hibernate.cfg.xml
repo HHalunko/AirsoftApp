@@ -22,6 +22,14 @@
 		<mapping class="hlieb.model.Age" />
 		<mapping class="hlieb.model.Location" />
 		<mapping class="hlieb.model.Contact" />
+		<mapping class="hlieb.model.Team" />
+		<mapping class="hlieb.model.Unit" />
+		<mapping class="hlieb.model.Conflict" />
+		<mapping class="hlieb.model.Camo" />
+		<mapping class="hlieb.model.weapons.WeaponAccessories" />
+		<mapping class="hlieb.model.weapons.Weapon" />
+		<mapping class="hlieb.model.gear.Gear" />
+		<mapping class="hlieb.model.gear.Glasses" />
 		
 	</session-factory>
 </hibernate-configuration>

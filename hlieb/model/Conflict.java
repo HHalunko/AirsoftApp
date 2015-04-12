@@ -3,15 +3,30 @@ package hlieb.model;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.TreeSet;
+import javax.persistence.*;
 
+@Entity
+@Table(name="Conflict")
 public class Conflict {
-	private static int count;
-	private final int id = ++count;
+	@Transient
+	private static long count;
+	@Id
+	@Column(name="id_Conflict")
+	private final long id = ++count;
 	//unique
+	@Column(name="name_Conflict")
 	private String operationName;
+	@Transient
 	private LocalDate startDate;
+	@Transient
 	private LocalDate endDate;
+	@Column(name="description_Conflict")
 	private String description;
+	@Column(name="start_Conflict")
+	private String start;
+	@Column(name="end_Conflict")
+	private String end;
+	@Transient
 	private Set <Unit> unitsParticipated = new TreeSet <Unit>();
 	
 	public Conflict() {
@@ -27,6 +42,8 @@ public class Conflict {
 		this.endDate = endDate;
 		this.description = description;
 		this.unitsParticipated = unitsParticipated;
+		this.start = startDate.toString();
+		this.end = endDate.toString();
 	}
 	
 	public String getOperationName() {
@@ -63,10 +80,10 @@ public class Conflict {
 		this.unitsParticipated.add(unit);
 		unit.addConflict(this);
 	}
-	public static int getCount() {
+	public static long getCount() {
 		return count;
 	}
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	

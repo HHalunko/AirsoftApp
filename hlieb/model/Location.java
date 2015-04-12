@@ -32,11 +32,13 @@ public class Location {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Location(String country, String city, String street) {
+	public Location(String country, String city, String street,
+			String coordinates) {
 		super();
 		this.country = country;
 		this.city = city;
 		this.street = street;
+		this.coordinates = coordinates;
 	}
 
 	public static long getCount() {

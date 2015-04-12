@@ -1,10 +1,13 @@
 package hlieb.model.gear;
 
+import javax.persistence.*; 
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)  
 public abstract class Gear {
-	private static int count;
-	private final int id = ++count;
+	@Column(name="model_name")
 	private String modelName;
+	@Column(name="color")
 	private String color;
+	@Column(name="manufacturer")
 	private String manufacturer;
 
 	public String getModelName() {
@@ -48,7 +51,6 @@ public abstract class Gear {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + id;
 		result = prime * result
 				+ ((manufacturer == null) ? 0 : manufacturer.hashCode());
 		result = prime * result
@@ -70,8 +72,6 @@ public abstract class Gear {
 				return false;
 		} else if (!color.equals(other.color))
 			return false;
-		if (id != other.id)
-			return false;
 		if (manufacturer == null) {
 			if (other.manufacturer != null)
 				return false;
@@ -87,10 +87,9 @@ public abstract class Gear {
 
 	@Override
 	public String toString() {
-		return " id=" + id + ", modelName=" + modelName + ", color="
-				+ color + ", manufacturer=" + manufacturer + "]";
+		return "Gear [modelName=" + modelName + ", color=" + color
+				+ ", manufacturer=" + manufacturer + "]";
 	}
-
 
 	
 }

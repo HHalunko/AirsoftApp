@@ -1,6 +1,6 @@
 package hlieb.model.gear;
 
-public class PTT extends Gear implements ElectronicGear{
+public class PTT extends Gear implements ElectronicGear {
 
 	public PTT() {
 		// TODO Auto-generated constructor stub
