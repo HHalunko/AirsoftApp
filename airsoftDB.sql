@@ -3,7 +3,6 @@ drop database if exists AirsoftAppDB;
 create database if not exists AirsoftAppDB;
 USE airsoftappdb;
 
-
  CREATE TABLE `Age` (
  `id_age` bigint (255) not null UNIQUE,
    `birth_date` varchar(200) NOT NULL,
@@ -22,23 +21,11 @@ USE airsoftappdb;
    `id_Contact` bigint(255) NOT NULL UNIQUE,
    `phone_Contact` varchar(20) NOT NULL UNIQUE,
    `email_Contact` varchar(20) NOT NULL UNIQUE,
-   `website_Contact` varchar(200),
    `skype_Contact` varchar(20) UNIQUE,
    `facebook_Contact` varchar(20) UNIQUE,
    `vk_Contact` varchar(50) UNIQUE,
    PRIMARY KEY (`id_Contact`)
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
- 
- CREATE TABLE `Manufacturer` (
- `id_Manufacturer` bigint (255) not null UNIQUE,
-   `name_Manufacturer` varchar(200) NOT NULL UNIQUE,
-   `country_Manufacturer` varchar(255) NOT NULL,
-   `contact_manufacturer` bigint(255),
-   PRIMARY KEY (`id_Manufacturer`),
-   FOREIGN KEY (contact_manufacturer) REFERENCES contact(id_Contact)
- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
  CREATE TABLE `Person` (
    `id_Person` bigint(255) NOT NULL UNIQUE,
    `firstName_Person` varchar(20) NOT NULL,
@@ -99,140 +86,29 @@ USE airsoftappdb;
    `id_WA` bigint(205) NOT NULL UNIQUE,
    `name_WA` varchar(20) NOT NULL UNIQUE,
    `type_WA` varchar(255) not null,
-   `manufacturer_WA` bigint(255) not null,
+   `manufacturer_WA` varchar(255) not null,
    `color_WA` varchar(255) not null,
-   PRIMARY KEY (`id_WA`),
-   FOREIGN KEY (manufacturer_WA) REFERENCES Manufacturer(id_Manufacturer)
+   PRIMARY KEY (`id_WA`)
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
      CREATE TABLE `Weapon` (
    `id_Weapon` bigint(205) NOT NULL UNIQUE,
    `model_Weapon` varchar(20) NOT NULL ,
-   `id_Manufacturer` bigint(255) not null,
+   `manufacturer_Weapon` varchar(255) not null,
    `prototype_Weapon` varchar(255),
    `info_Weapon` varchar(255),
    `color_Weapon` varchar(255) not null,
    `exhaust_Weapon` int (250) not null,
    `type_Weapon` varchar (255) not null,
    `energy_type_Weapon` varchar (255) not null,
-   FOREIGN KEY (id_Manufacturer) REFERENCES Manufacturer(id_Manufacturer),
    PRIMARY KEY (`id_Weapon`)
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
-  	CREATE TABLE `Gear` (
-   `id` bigint(205) NOT NULL UNIQUE,
-   `type` varchar(255) not null,
+      CREATE TABLE `Glasses` (
+   `id_Glasses` bigint(205) NOT NULL UNIQUE,
    `model_name` varchar(20) ,
    `color` varchar(255) ,
-   `id_manufacturer_gear` bigint(255) not null,
-   `lense_glasses` varchar(255),
-   `type_Headwear` varchar(255),
-   `isActive_HeadGear` char(1),
-   FOREIGN KEY (id_manufacturer_gear) REFERENCES Manufacturer(id_Manufacturer),
-   PRIMARY KEY (`id`)
+   `manufacturer` varchar(255),
+   `lense_Glasses` varchar(255),
+   PRIMARY KEY (`id_Glasses`)
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
- CREATE TABLE `person_team`(
-   `id_Person` bigint(255) NOT NULL ,
-	`id_Team` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_Person) REFERENCES Person(id_Person),
-    FOREIGN KEY (id_Team) REFERENCES Team (id_Team)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-  CREATE TABLE `person_camo`(
-   `id_Person` bigint(255) NOT NULL ,
-	`id_Camo` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_Person) REFERENCES Person(id_Person),
-    FOREIGN KEY (id_Camo) REFERENCES Camo (id_Camo)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-   CREATE TABLE `person_weapon`(
-   `id_Person` bigint(255) NOT NULL ,
-	`id_Weapon` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_Person) REFERENCES Person(id_Person),
-    FOREIGN KEY (id_Weapon) REFERENCES Weapon (id_Weapon)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-   CREATE TABLE `person_gear`(
-   `id_Person` bigint(255) NOT NULL ,
-	`id_Gear` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_Person) REFERENCES Person(id_Person),
-    FOREIGN KEY (id_Gear) REFERENCES Gear (id)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-    CREATE TABLE `team_camo`(
-   `id_Team` bigint(255) NOT NULL ,
-	`id_Camo` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_Team) REFERENCES Team(id_Team),
-    FOREIGN KEY (id_Camo) REFERENCES Camo (id_Camo)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-     CREATE TABLE `team_person`(
-   `id_Team` bigint(255) NOT NULL ,
-	`id_Person` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_Team) REFERENCES Team(id_Team),
-    FOREIGN KEY (id_Person) REFERENCES Person (id_Person)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-     CREATE TABLE `team_weapon`(
-   `id_Team` bigint(255) NOT NULL ,
-	`id_Weapon` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_Team) REFERENCES Team(id_Team),
-    FOREIGN KEY (id_Weapon) REFERENCES Weapon (id_Weapon)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-     CREATE TABLE `team_gear`(
-   `id_Team` bigint(255) NOT NULL ,
-	`id_Gear` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_Team) REFERENCES Team(id_Team),
-    FOREIGN KEY (id_Gear) REFERENCES Gear (id)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-      CREATE TABLE `unit_conflict`(
-   `id_unit` bigint(255) NOT NULL ,
-	`id_conflict` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_unit) REFERENCES unit(id_unit),
-    FOREIGN KEY (id_conflict) REFERENCES conflict (id_conflict)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-      CREATE TABLE `unit_weapon`(
-   `id_unit` bigint(255) NOT NULL ,
-	`id_weapon` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_unit) REFERENCES unit(id_unit),
-    FOREIGN KEY (id_weapon) REFERENCES weapon (id_weapon)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-      CREATE TABLE `unit_gear`(
-   `id_unit` bigint(255) NOT NULL ,
-	`id_Gear` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_unit) REFERENCES unit(id_unit),
-    FOREIGN KEY (id_Gear) REFERENCES Gear (id)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-      CREATE TABLE `unit_camo`(
-   `id_unit` bigint(255) NOT NULL ,
-	`id_camo` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_unit) REFERENCES unit(id_unit),
-    FOREIGN KEY (id_camo) REFERENCES camo (id_camo)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-       CREATE TABLE `weapon_weaponaccessories`(
-   `id_weapon` bigint(255) NOT NULL ,
-	`id_weaponaccessories` bigint(255) NOT NULL ,
-    FOREIGN KEY (id_weapon) REFERENCES weapon(id_weapon),
-    FOREIGN KEY (id_weaponaccessories) REFERENCES weaponaccessories (id_wa)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-        CREATE TABLE `camo_manufacturers`(
-   `id_camo` bigint(255) NOT NULL ,
-	`id_manufacturer` bigint(255) NOT NULL ,
-     FOREIGN KEY (id_camo) REFERENCES camo (id_camo),
-     FOREIGN KEY (id_manufacturer) REFERENCES Manufacturer(id_Manufacturer)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-         CREATE TABLE `camo_unit`(
-   `id_camo` bigint(255) NOT NULL ,
-	`id_unit` bigint(255) NOT NULL ,
-     FOREIGN KEY (id_camo) REFERENCES camo (id_camo),
-     FOREIGN KEY (id_unit) REFERENCES unit(id_unit)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
