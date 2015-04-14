@@ -18,7 +18,8 @@ public class Camo implements Comparable<Camo>{
 	private String name;
 	@Column(name="info_Camo")
 	private String info;
-	@Transient
+	@ManyToMany(cascade=CascadeType.PERSIST)
+	@JoinTable(name="camo_team", joinColumns = @JoinColumn(name = "id_camo"), inverseJoinColumns = @JoinColumn(name = "id_team"))
 	private Set<Team> usingTeams = new TreeSet<Team>();
 	@ManyToMany(cascade=CascadeType.PERSIST)
 	@JoinTable(name="camo_manufacturers", joinColumns = @JoinColumn(name = "id_camo"), inverseJoinColumns = @JoinColumn(name = "id_manufacturer"))

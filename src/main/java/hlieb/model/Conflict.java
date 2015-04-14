@@ -3,6 +3,7 @@ package hlieb.model;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.TreeSet;
+
 import javax.persistence.*;
 
 @Entity
@@ -26,7 +27,8 @@ public class Conflict implements Comparable<Conflict> {
 	private String start;
 	@Column(name = "end_Conflict")
 	private String end;
-	@Transient
+	@ManyToMany(cascade=CascadeType.PERSIST)
+	@JoinTable(name="conflict_unit", joinColumns = @JoinColumn(name = "id_conflict"), inverseJoinColumns = @JoinColumn(name = "id_unit"))
 	private Set<Unit> unitsParticipated = new TreeSet<Unit>();
 
 	public Conflict() {
