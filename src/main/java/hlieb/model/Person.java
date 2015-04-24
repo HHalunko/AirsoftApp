@@ -40,6 +40,8 @@ public class Person implements Comparable<Person>{
 	private String nickname;
 	@Column(name = "info_Person")
 	private String info;
+	@Column(name="password_Person")
+	private String password;
 	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "id_location_Person")
 	private Location location;
@@ -213,6 +215,14 @@ public class Person implements Comparable<Person>{
 
 	public List<Weapon> getWeapons() {
 		return personWeapons;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void removeCamo(Camo teamCamo){

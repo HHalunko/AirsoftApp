@@ -135,37 +135,39 @@ public class AirsoftNetworkApplication {
 		camo.addManufacturer(m2);
 
 		
-		SessionFactory sessionFactory = new Configuration().configure()
-				.buildSessionFactory();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.persist(p);
-		session.persist(p2);
-		session.persist(p3);
-		session.persist(t);
-		session.persist(camo);
-		session.persist(wa);
-		session.persist(w);
-		session.persist(g);
-		session.persist(h);
-		session.persist(kn);
-		session.persist(sh);
-		session.persist(gl);
-		session.persist(hlmt);
-		session.persist(hlmtcvr);
-		session.persist(ir);
-		session.persist(lm);
-		session.persist(fl);
-		session.persist(nvgm);
-		session.persist(cs);
-		session.persist(pc);
-		session.persist(hg);
-		session.persist(nav);
-		session.persist(nvg);
-		session.persist(r);
-		session.persist(ptt);
-		session.persist(unit);
-		session.getTransaction().commit();
-		session.close();
+		System.out.println(Counter.getCount());
+		
+//		SessionFactory sessionFactory = new Configuration().configure()
+//				.buildSessionFactory();
+//		Session session = sessionFactory.openSession();
+//		session.beginTransaction();
+//		session.persist(p);
+//		session.persist(p2);
+//		session.persist(p3);
+//		session.persist(t);
+//		session.persist(camo);
+//		session.persist(wa);
+//		session.persist(w);
+//		session.persist(g);
+//		session.persist(h);
+//		session.persist(kn);
+//		session.persist(sh);
+//		session.persist(gl);
+//		session.persist(hlmt);
+//		session.persist(hlmtcvr);
+//		session.persist(ir);
+//		session.persist(lm);
+//		session.persist(fl);
+//		session.persist(nvgm);
+//		session.persist(cs);
+//		session.persist(pc);
+//		session.persist(hg);
+//		session.persist(nav);
+//		session.persist(nvg);
+//		session.persist(r);
+//		session.persist(ptt);
+//		session.persist(unit);
+//		session.getTransaction().commit();
+//		session.close();
 	}
 }
